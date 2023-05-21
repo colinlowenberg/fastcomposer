@@ -57,12 +57,12 @@ class ModelWrapper:
         
 
 def create_demo():
-    TITLE = '# [FastComposer Demo](https://github.com/mit-han-lab/fastcomposer)'
+    TITLE = '# [instacombine](https://github.com/colinlowenberg/fastcomposer)'
 
     DESCRIPTION = '''To run the demo, you should:   
-    1. Upload your images. The order of image1 and image2 needs to match the order of the subects in the prompt. You only need 1 image for single subject generation.   
-    2. Input proper text prompts, such as "A woman <A*> and a man <A*> in the snow" or "A painting of a man <A*> in the style of Van Gogh", where "<A*>" specifies the token you want to augment and comes after the word.   
-    3. Click the Run button. You can also adjust the hyperparameters to improve the results. Look at the job status to see if there are any errors with your input.
+    1. Upload an image with two or more faces. 
+    2. Describe what you want the end result to be "A woman <A*> in the snow" or "A painting of a man <A*> in the style of Van Gogh", where "<A*>" comes after the keyword.   
+    3. Click Run!
     '''
     args = parse_args()
     accelerator = Accelerator(
@@ -78,8 +78,6 @@ def create_demo():
             with gr.Column():
                 with gr.Box():
                     image1 = gr.Image(label='Image 1', type='pil')
-                    image2 = gr.Image(label='Image 2', type='pil')
-
                     gr.Markdown(
                         'Upload the image for your subject')
                 prompt = gr.Text(
@@ -92,7 +90,7 @@ def create_demo():
                     maximum=1,
                     step=0.05,
                     value=0.7,
-                    info='A smaller alpha aligns images with text better, but may deviate from the subject image. Increase alpha to improve identity preservation, decrease it for prompt consistency.'
+                    info='Increase alpha to improve identity preservation and reduce creativity.'
                 )
                 run_button = gr.Button('Run')
                 with gr.Accordion(label='Advanced options', open=False):
